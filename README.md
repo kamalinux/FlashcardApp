@@ -1,4 +1,4 @@
-# Lab 1 : 
+# Lab 1 : Flashcard App
 
 ## Required
 - [x] Create New Project in Android Studio
