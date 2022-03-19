@@ -34,4 +34,4 @@
 - [x] User can also enter multiple choice answers when creating a card
 - [x] App is further styled and customized!
 
-<img src="http://g.recordit.co/9B3WqEC50s.gif" width=200><br>
+<img src="https://recordit.co/v70nrKK4M6" width=200><br>
