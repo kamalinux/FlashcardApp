@@ -10,4 +10,14 @@
     <color name="my_red_color">#ee0000</color>
     <color name="my_green_color">#4CAF50</color>
     <color name="my_reset_color">#FF9800</color>
+    <color name="deep_purple">#450088</color>
+    <color name="shock_purple">#a146ff</color>
+    <color name="shock_pink">#fc36fd</color>
+    <color name="shock_orange">#ff7c44</color>
+    <color name="pink_accent">#e187ff</color>
+    <color name="yellow_accent">#ffc564</color>
+    <color name="purple_accent">#b887ff</color>
+    <color name="deep_blue_purple">#040a53</color>
+    <color name="correct_green">#75cfb8</color>
+    <color name="incorrect_red">#ff6666</color>
 </resources>

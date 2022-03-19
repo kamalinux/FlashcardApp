@@ -92,6 +92,22 @@
         android:layout_alignParentBottom="true"
         />
 
+    <ImageView
+        android:id="@+id/add_card"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        app:srcCompat="@drawable/ic_add" />
+
+    <ImageView
+        android:id="@+id/edit_card"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        app:srcCompat="@drawable/ic_edit" />
 
 
 </RelativeLayout>
