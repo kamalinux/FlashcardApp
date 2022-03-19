@@ -34,4 +34,4 @@
 - [x] User can also enter multiple choice answers when creating a card
 - [x] App is further styled and customized!
 
-<img src="https://github.com/kamalinux/FlashcardApp/lab2-walkthrough.gif" width=200><br>
+<img src="https://github.com/kamalinux/FlashcardApp/blob/main/lab2-walkthrough.gif" width=200><br>
