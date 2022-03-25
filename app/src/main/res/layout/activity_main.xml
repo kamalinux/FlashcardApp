@@ -58,7 +58,6 @@
         android:layout_below="@id/answer1"
         />
 
-
     <TextView
         android:id="@+id/answer3"
         android:layout_width="match_parent"
@@ -73,6 +72,39 @@
         android:layout_marginRight="10dp"
         android:layout_below="@id/answer2"
         />
+
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/answer3"
+        android:layout_alignParentRight="true"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="30dp"
+        android:id="@+id/next_card"
+        android:src="@drawable/next_icon"/>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/answer3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="30dp"
+        android:id="@+id/delete_card"
+        android:src="@drawable/trash_icon"/>
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/answer3"
+        android:layout_alignParentLeft="true"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="30dp"
+        android:id="@+id/prev_card"
+        android:rotation="180"
+        android:src="@drawable/next_icon"/>
+
 
     <ImageView
         android:id="@+id/reset"

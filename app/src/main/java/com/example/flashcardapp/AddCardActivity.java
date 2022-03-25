@@ -49,15 +49,14 @@ public class AddCardActivity extends AppCompatActivity {
                 String firstAnswer = ((EditText) findViewById(R.id.editIncorrectField1)).getText().toString();
                 String secondAnswer = ((EditText) findViewById(R.id.editIncorrectField2)).getText().toString();
 
-                data.putExtra(QUESTION_KEY, inputQuestion);
-                data.putExtra(ANSWER_KEY, thirdAnswer);
-                data.putExtra(WRONG_ANSWER1_KEY, firstAnswer);
-                data.putExtra(WRONG_ANSWER2_KEY, secondAnswer);
-                setResult(RESULT_OK, data);
-
                 if (inputQuestion.equals("") || thirdAnswer.equals("")) {
                     Toast.makeText(AddCardActivity.this, "Please make sure you've filled out all required fields!", Toast.LENGTH_SHORT).show();
                 } else {
+                    data.putExtra(QUESTION_KEY, inputQuestion);
+                    data.putExtra(ANSWER_KEY, thirdAnswer);
+                    data.putExtra(WRONG_ANSWER1_KEY, firstAnswer);
+                    data.putExtra(WRONG_ANSWER2_KEY, secondAnswer);
+                    setResult(RESULT_OK, data);
                     finish();
                 }
             }
