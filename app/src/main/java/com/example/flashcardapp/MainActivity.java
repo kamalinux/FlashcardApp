@@ -1,17 +1,17 @@
 package com.example.flashcardapp;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
+import android.view.ViewAnimationUtils;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -75,12 +75,14 @@ public class MainActivity extends AppCompatActivity {
         wrongAnswer2 = findViewById(R.id.answer2);
         correctAnswer = findViewById(R.id.answer3);
         ImageView toggleChoices = findViewById(R.id.toggle_choices_visibility);
-
         ImageView addButton = findViewById(R.id.add_card);
         ImageView editButton = findViewById(R.id.edit_card);
         ImageView nextButton = findViewById(R.id.next_card);
         ImageView prevButton = findViewById(R.id.prev_card);
         ImageView deleteButton = findViewById(R.id.delete_card);
+
+        final Animation leftOutAnim = AnimationUtils.loadAnimation(flashcardQuestion.getContext(), R.anim.left_out);
+        final Animation rightInAnim = AnimationUtils.loadAnimation(flashcardQuestion.getContext(), R.anim.right_in);
 
         flashcardDatabase = new FlashcardDatabase(getApplicationContext());
         allFlashcards = flashcardDatabase.getAllCards();
@@ -101,12 +103,23 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 flashcardQuestion.setVisibility(View.INVISIBLE);
                 flashcardAnswer.setVisibility(View.VISIBLE);
+
             }
         });
 
         flashcardAnswer.setOnClickListener(view -> {
             flashcardQuestion.setVisibility(View.VISIBLE);
             flashcardAnswer.setVisibility(View.INVISIBLE);
+
+            int cx = flashcardAnswer.getWidth() / 2;
+            int cy = flashcardAnswer.getHeight() / 2;
+
+            float finalRadius = (float) Math.hypot(cx, cy);
+
+            Animator anim = ViewAnimationUtils.createCircularReveal(flashcardAnswer, cx, cy, 0f, finalRadius);
+
+            anim.setDuration(3000);
+            anim.start();
         });
 
         wrongAnswer1.setOnClickListener(view -> {
@@ -128,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
         correctAnswer.setOnClickListener(view -> {
             correctAnswer.setBackgroundColor(getResources().getColor(R.color.my_green_color, null));
             correctAnswer.setTextColor(getResources().getColor(R.color.black));
+
         });
 
         toggleChoices.setOnClickListener(view -> {
@@ -149,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
             Intent toAddCard = new Intent(MainActivity.this, AddCardActivity.class);
             if (toAddCard != null) {
                 startActivityForResult(toAddCard, 100);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
             }
         });
 
@@ -190,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.flashcard_answer).setVisibility(View.INVISIBLE);
             }
         });
-
+        /*
         nextButton.setOnClickListener(view -> {
             int randomIndex = getRandomNumber(0, allFlashcards.size() - 1);
 
@@ -213,8 +228,55 @@ public class MainActivity extends AppCompatActivity {
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Accessed an index out of bounds of allFlashcards");
             }
+        });*/
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (allFlashcards != null && allFlashcards.size() > 1) {
+
+                    Random rand = new Random();
+
+                    cardIndex = rand.nextInt(allFlashcards.size());
+                    cardToEdit = allFlashcards.get(cardIndex);
+
+                    flashcardQuestion.setText(allFlashcards.get(cardIndex).getQuestion());
+                    flashcardAnswer.setText(allFlashcards.get(cardIndex).getAnswer());
+                    correctAnswer.setText(allFlashcards.get(cardIndex).getAnswer());
+                    wrongAnswer1.setText(allFlashcards.get(cardIndex).getWrongAnswer1());
+                    wrongAnswer2.setText(allFlashcards.get(cardIndex).getWrongAnswer2());
+
+                    if (isShowingAnswers) {
+                        flashcardAnswer.setVisibility(View.INVISIBLE);
+                        flashcardAnswer.setVisibility(View.VISIBLE);
+                        findViewById(R.id.flashcard_answer).startAnimation(rightInAnim);
+                    }
+                    else{
+                        findViewById(R.id.flashcard_question).startAnimation(leftOutAnim);
+                    }
+                }
+            }
         });
 
+        leftOutAnim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                findViewById(R.id.flashcard_question).startAnimation(leftOutAnim);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                findViewById(R.id.flashcard_question).startAnimation(rightInAnim);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                // we don't need to worry about this method
+            }
+        });
+
+        /*
         prevButton.setOnClickListener(view -> {
             int randomIndex = getRandomNumber(0, allFlashcards.size() - 1);
 
@@ -236,6 +298,35 @@ public class MainActivity extends AppCompatActivity {
                 resetMultipleChoice();
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Accessed an index out of bounds of allFlashcards");
+            }
+        });*/
+
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (allFlashcards != null && allFlashcards.size() > 1) {
+
+                    Random rand = new Random();
+
+                    cardIndex = rand.nextInt(allFlashcards.size());
+                    cardToEdit = allFlashcards.get(cardIndex);
+
+                    flashcardQuestion.setText(allFlashcards.get(cardIndex).getQuestion());
+                    flashcardAnswer.setText(allFlashcards.get(cardIndex).getAnswer());
+                    correctAnswer.setText(allFlashcards.get(cardIndex).getAnswer());
+                    wrongAnswer1.setText(allFlashcards.get(cardIndex).getWrongAnswer1());
+                    wrongAnswer2.setText(allFlashcards.get(cardIndex).getWrongAnswer2());
+
+                    if (isShowingAnswers) {
+                        flashcardAnswer.setVisibility(View.INVISIBLE);
+                        flashcardAnswer.setVisibility(View.VISIBLE);
+                        findViewById(R.id.flashcard_answer).startAnimation(rightInAnim);
+                    }
+                    else{
+                        findViewById(R.id.flashcard_question).startAnimation(leftOutAnim);
+                    }
+                }
             }
         });
 
